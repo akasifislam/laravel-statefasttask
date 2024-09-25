@@ -35,7 +35,10 @@
                                         {{ $url->original_url }}
                                     </td>
                                     <td class="px-4 py-2">
-                                        {{ $url->short_code }}
+                                        <a target="_blank" href="{{ url($url->short_code) }}"
+                                            class="text-blue-600 hover:underline">
+                                            {{ $url->short_code }}
+                                        </a>
                                     </td>
                                     <td class="px-4 py-2">
                                         {{ $url->click_count }}

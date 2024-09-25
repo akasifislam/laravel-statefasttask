@@ -12,7 +12,11 @@ class UrlController extends Controller
      */
     public function index()
     {
-        $urls = Url::latest('id')->get();
+        if (auth()->user()->role === 'admin') {
+            $urls = Url::latest('id')->get();
+        } else {
+            $urls = Url::where('user_id', auth()->id())->latest('id')->get();
+        }
         return view('admin.url.index', compact('urls'));
     }
 

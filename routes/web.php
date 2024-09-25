@@ -35,6 +35,17 @@ Route::middleware('auth')->group(function () {
     Route::resource('urls', UrlController::class);
 });
 
+Route::middleware('auth')->group(function () {
+    Route::resource('urls', UrlController::class);
+});
+
+
+Route::group(['middleware' => ['auth', 'role:admin']], function () {});
+
+Route::group(['middleware' => ['auth', 'role:user']], function () {});
+
+
+
 Route::get('{url}', function ($url) {
     $urllink = Url::where('short_code', $url)->first();
     if ($urllink) {
