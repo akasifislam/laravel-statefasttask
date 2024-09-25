@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UrlController;
+use App\Models\Url;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,4 +30,19 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+
+Route::middleware('auth')->group(function () {
+    Route::resource('urls', UrlController::class);
+});
+
+Route::get('{url}', function ($url) {
+    $urllink = Url::where('short_code', $url)->first();
+    if ($urllink) {
+        $urllink->increment('click_count');
+        return redirect($urllink->original_url);
+    }
+    return abort(404);
+});
+
+
+require __DIR__ . '/auth.php';
