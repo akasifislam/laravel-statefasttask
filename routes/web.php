@@ -35,10 +35,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('urls', UrlController::class);
 });
 
-Route::middleware('auth')->group(function () {
-    Route::resource('urls', UrlController::class);
-});
-
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {});
 

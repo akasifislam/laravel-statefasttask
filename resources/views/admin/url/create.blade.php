@@ -17,6 +17,9 @@
                             <label for="original_url" class="block text-gray-700 font-bold mb-2">Name</label>
                             <input type="text" id="original_url" name="original_url" placeholder="Original Url"
                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                            @error('original_url')
+                                <div class="error text-red-500">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <!-- Submit Button -->
